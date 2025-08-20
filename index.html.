@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Присоединиться к Telegram-каналу</title>
+  <meta name="description" content="Подключись к каналy и смотри всё в реальном времени." />
+  <link rel="preconnect" href="https://connect.facebook.net" crossorigin>
+  <style>
+    :root{
+      --bg:#0e1116; --card:#151a23; --muted:#9aa3b2; --text:#e9edf3; --line:#232a37;
+      --accent:#2ca85f; /* зелёная кнопка как на Telegram join */
+      --accent-hover:#249252; --badge:#2b64d5; --shadow: 0 20px 40px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background: radial-gradient(1200px 800px at 10% -10%, #1a2340 0%, rgba(26,35,64,0) 60%),
+                  radial-gradient(1000px 700px at 100% 0%, #1a2a28 0%, rgba(26,42,40,0) 55%),
+                  var(--bg);
+      color:var(--text);
+      display:flex; align-items:center; justify-content:center; padding:24px;
+    }
+    .card{
+      width:100%; max-width:680px; background:var(--card); border:1px solid var(--line);
+      border-radius:20px; box-shadow:var(--shadow); overflow:hidden;
+    }
+    .hero{padding:28px 28px 18px; display:flex; gap:18px; align-items:center;}
+    .avatar{width:84px; height:84px; border-radius:50%; background:linear-gradient(135deg,#2b6cb0,#3182ce,#63b3ed);
+      display:grid; place-items:center; color:white; font-weight:800; font-size:28px; letter-spacing:.5px}
+    .head{flex:1}
+    .badge{display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:700;
+      text-transform:uppercase; letter-spacing:.06em; padding:6px 10px; border-radius:999px; color:#e8f0ff; background:#24417d}
+    .title{font-size:26px; margin:10px 0 4px}
+    .handle{color:var(--muted); font-size:14px}
+
+    .stats{display:flex; gap:16px; padding:0 28px 16px; flex-wrap:wrap}
+    .stat{display:flex; align-items:center; gap:8px; padding:8px 12px; border:1px solid var(--line);
+      border-radius:12px; color:#cdd5e1; font-size:14px}
+
+    .desc{padding:0 28px 20px; color:#cfd6e5; line-height:1.65}
+
+    .cta{padding:8px 28px 32px; display:flex; flex-wrap:wrap; gap:12px}
+    .btn{appearance:none; border:0; border-radius:12px; padding:14px 18px; font-weight:700; cursor:pointer}
+    .btn-primary{background:var(--accent); color:#fff; flex:1; min-width:220px}
+    .btn-primary:hover{background:var(--accent-hover)}
+    .btn-secondary{background:transparent; color:#9fb0c8; border:1px solid var(--line)}
+
+    .foot{padding:18px 28px 26px; border-top:1px solid var(--line); display:flex; gap:12px; flex-wrap:wrap; align-items:center; color:var(--muted); font-size:12px}
+    .dot{width:6px; height:6px; background:#3b82f6; border-radius:50%}
+    .tg-icon{width:18px; height:18px; margin-right:6px; vertical-align:-3px}
+
+    @media (max-width:520px){
+      .hero{padding:20px 18px 12px}
+      .desc{padding:0 18px 16px}
+      .stats{padding:0 18px 12px}
+      .cta{padding:6px 18px 24px}
+      .foot{padding:14px 18px 18px}
+    }
+  </style>
+
+  <!-- Facebook Pixel: замените YOUR_PIXEL_ID -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'YOUR_PIXEL_ID');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/>
+  </noscript>
+</head>
+<body>
+  <main class="card" role="main">
+    <section class="hero">
+      <div class="avatar" id="avatar">TG</div>
+      <div class="head">
+        <span class="badge" aria-label="Тип">Канал</span>
+        <h1 class="title" id="title">Название канала</h1>
+        <div class="handle" id="handle">@your_channel</div>
+      </div>
+    </section>
+
+    <section class="stats" aria-label="Статистика">
+      <div class="stat" title="Участники">👥 <strong id="members">12 840</strong> участников</div>
+      <div class="stat" title="Онлайн">🟢 <strong id="online">1 203</strong> сейчас онлайн</div>
+      <div class="stat" title="Тематика">📊 Сигналы и разбор сделок</div>
+    </section>
+
+    <section class="desc" id="desc">
+      Эксклюзивный доступ к торговым сессиям, идеи входа и разбор сделок в реальном времени. Подключайся и смотри процесс изнутри.
+    </section>
+
+    <section class="cta">
+      <button id="joinBtn" class="btn btn-primary">
+        <svg class="tg-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 3.3L2.6 10.8c-1.3.5-1.3 1.3-.2 1.6l4.9 1.5 1.9 6c.2.6.4.8.8.8.4 0 .6-.2.9-.5l2.2-2.1 4.6 3.4c.8.4 1.4.1 1.6-.8l3-14.1c.3-1.1-.4-1.7-1.3-1.3zM8.4 13.8l9.8-6.1c.5-.3 1-.1.6.2l-7.8 7.2-.3 3.5-1.7-4.8c-.1-.2 0-.3.1-.4z"/></svg>
+        Открыть в Telegram
+      </button>
+      <button id="copyBtn" class="btn btn-secondary">Скопировать ссылку</button>
+    </section>
+
+    <footer class="foot">
+      <span class="dot"></span> Нажимая кнопку, вы переходите напрямую в Telegram. Событие зафиксируется в пикселе до открытия канала.
+    </footer>
+  </main>
+
+  <script>
+    // === НАСТРОЙКИ ===
+    const CHANNEL_HANDLE = 'your_channel'; // @your_channel без @
+    const TG_BASE = `https://t.me/${CHANNEL_HANDLE}`;
+    const DEFAULT_START = 'fbad';
+
+    // Подстановка текста (удобно править здесь или прямо в HTML)
+    document.getElementById('title').textContent = 'Трейдинг | Сигналы в реальном времени';
+    document.getElementById('handle').textContent = '@' + CHANNEL_HANDLE;
+    document.getElementById('members').textContent = '12 840';
+    document.getElementById('online').textContent = '1 203';
+    document.getElementById('desc').textContent = 'Доступ к живым торговым сессиям и сигналам. Наблюдай каждый шаг в реальном времени.';
+    document.getElementById('avatar').textContent = 'TG'; // Можно заменить на инициалы
+
+    function buildTelegramUrl(){
+      // Собираем start с UTM-метками, чтобы видеть источник внутри бота/канала
+      const u = new URL(TG_BASE);
+      const params = new URLSearchParams(window.location.search);
+      const utmKeys = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+      const extras = [];
+      utmKeys.forEach(k=>{ if(params.get(k)) extras.push(k+'='+params.get(k)) });
+      const stamp = Date.now().toString(36);
+      const start = DEFAULT_START + (extras.length ? '__'+extras.join('__') : '') + '__ts=' + stamp;
+      u.searchParams.set('start', start);
+      return u.toString();
+    }
+
+    const tgUrl = buildTelegramUrl();
+
+    // Кнопка «Открыть в Telegram»: сначала фиксируем лид, потом открываем канал
+    document.getElementById('joinBtn').addEventListener('click', function(ev){
+      ev.preventDefault();
+      try {
+        fbq('track', 'Lead', {eventID: Date.now()+ '-' + Math.random().toString(36).slice(2)});
+        fbq('trackCustom', 'OutboundTelegram', {href: tgUrl});
+      } catch(e){}
+
+      // Дадим пикселю долю секунды, затем открываем в новой вкладке (мягче для модерации)
+      const openTG = () => window.open(tgUrl, '_blank', 'noopener');
+      setTimeout(openTG, 180);
+      setTimeout(openTG, 650); // резерв на случай лагов
+    }, {passive:false});
+
+    // Копирование ссылки (если кто-то открывает с desktop и хочет переслать)
+    document.getElementById('copyBtn').addEventListener('click', async ()=>{
+      try { await navigator.clipboard.writeText(tgUrl); alert('Ссылка скопирована'); } catch(e){ alert('Скопируй вручную: '+tgUrl); }
+    });
+  </script>
+</body>
+</html>
